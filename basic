@@ -1,0 +1,29 @@
+import pandas as pd
+import os
+import codecs
+
+with codecs.open("search_word_file.csv", "r", "Shift-JIS", "ignore") as file:
+    data = pd.read_table(file, delimiter=",")
+    print(data)
+    
+text_list = []
+for i in range(len(data)): # dataの行数分
+    data2 = data["word"][i].split()
+    for j in range(len(data2)): # dataの行数分
+        data3 = []
+        data3.append(data2[j])
+        text_list.append(','.join(data3))  # リストをカンマ区切りの文字列にして詰める
+print('\n'.join(text_list)) # 改行で表示する
+
+df = pd.DataFrame(text_list,columns=['word'])
+df.head()
+
+value_cnt = df['word'].value_counts()
+print(value_cnt)
+print(type(value_cnt))
+
+# dataframeにまとめる
+df2 = pd.DataFrame(value_cnt)
+df2.head()
+
+df2.to_csv("search_word_result.csv", index = True, encoding="shift_jis")
