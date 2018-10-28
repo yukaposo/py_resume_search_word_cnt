@@ -1,0 +1,26 @@
+# エラー時の試行錯誤メモ
+
+text_list = []
+for i in range(len(data)): # dataの行数分
+    d = str(data["word"][i]).replace(" ", "||").replace("　", "||")
+    #data2 = data["json_extract_path_text"][i].split('||')
+    data2 = d.split('||')
+    for j in range(len(data2)): # dataの行数分
+        data3 = []
+        data3.append(data2[j])
+        text_list.append(','.join(data3)) 
+print('\n'.join(text_list)) 
+
+text_list = []
+for i in range(len(data)): # dataの行数分
+    access_tm = data['access_tm'][i]
+    #print(str(i) + " : " + str(data["json_extract_path_text"][i]))
+    d = str(data["json_extract_path_text"][i]).replace(" ", "||").replace("　", "||")
+    #data2 = data["json_extract_path_text"][i].split('||')
+    data2 = d.split('||')
+    for j in range(len(data2)): # dataの行数分
+        data3 = []
+        data3.append(access_tm)
+        data3.append(data2[j])
+        text_list.append(','.join(data3)) 
+print('\n'.join(text_list)) 
