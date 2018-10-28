@@ -42,3 +42,18 @@ df2.to_csv("result.csv", index = False, encoding = "shift_jis")
 value_cnt = df2['word'].value_counts()
 print(value_cnt)
 print(type(value_cnt))
+
+# カウントした結果をdataframeにまとめる
+df3 = pd.DataFrame(value_cnt)
+df3.head()
+
+# おまけ:行の名前をつけるver.
+text_list = []
+for i in range(len(data)): # dataの行数分
+    data2 = data["json_extract_path_text"][i].split()
+    for j in range(len(data2)): # dataの行数分
+        data3 = []  # 文字それぞれをリスト化
+        data3.append(str(i))  # 行の名前をつける
+        data3.append(data2[j])
+        text_list.append(','.join(data3))  # リストをカンマ区切りの文字列にして詰める
+print('\n'.join(text_list))  # 改行で表示する
