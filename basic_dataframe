@@ -1,0 +1,44 @@
+import pandas as pd
+import os
+import codecs
+
+with codecs.open("search_word.csv", "r", "Shift-JIS", "ignore") as file:
+    data = pd.read_table(file, delimiter=",")
+    print(data)
+    
+text_list = []
+for i in range(len(data)): # dataの行数分
+    ip = data['server_ip'][i]
+    access_tm = data['access_tm'][i]
+    data2 = data["word"][i].split()
+    for j in range(len(data2)): # dataの行数分
+        data3 = []
+        data3.append(ip)
+        data3.append(access_tm)
+        data3.append(data2[j])
+        text_list.append(','.join(data3)) 
+print('\n'.join(text_list))
+
+df = pd.DataFrame(text_list,columns=['columns'])
+df.head()
+# これだと[ip,access_tm,word]で1カラムになる
+
+df_add = df['columns'].str.split(',', expand=True)
+# 列を追加
+df['server_ip'] = df_add[0]
+df['access_tm'] = df_add[1]
+df['word'] = df_add[2]
+# ip,access_tm,word を分離
+
+df.head()
+
+# columns,ip,access_tm,word で出力されるので、columnsの列を削除
+df2 = df.drop('columns', axis=1)
+df2.head()
+
+df2.to_csv("result.csv", index = False, encoding = "shift_jis")
+
+# ワードをカウント
+value_cnt = df2['word'].value_counts()
+print(value_cnt)
+print(type(value_cnt))
