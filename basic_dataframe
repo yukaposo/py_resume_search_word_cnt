@@ -47,6 +47,9 @@ print(type(value_cnt))
 df3 = pd.DataFrame(value_cnt)
 df3.head()
 
+# 手っ取り早くcsvにしたいときはこちらでも良い
+# value_cnt.to_csv("result_201810.csv", encoding="shift_jis")  # index = False はつけてはいけない（wordが表示されない）
+
 # おまけ:行の名前をつけるver.
 text_list = []
 for i in range(len(data)): # dataの行数分
