@@ -1,5 +1,24 @@
 # エラー時の試行錯誤メモ
 
+# int型が弾かれた場合
+text_list = []
+for i in range(len(data)): # dataの行数分
+    recruiter_id = data['recruiter_id'][i]
+    access_date = data['access_date'][i]
+    data2 = data['word'][i].split()
+    for j in range(len(data2)): # dataの行数分
+        data3 = []
+        data3.append(str(recruiter_id))
+        data3.append(access_date)
+        data3.append(str(data2[j]))
+        text_list.append(','.join(data3)) 
+print('\n'.join(text_list))
+
+
+# jupiter自体に処理が弾かれた場合
+https://aotamasaki.hatenablog.com/entry/2018/04/08/123146
+
+
 text_list = []
 for i in range(len(data)): # dataの行数分
     d = str(data["word"][i]).replace(" ", "||").replace("　", "||")
@@ -10,6 +29,7 @@ for i in range(len(data)): # dataの行数分
         data3.append(data2[j])
         text_list.append(','.join(data3)) 
 print('\n'.join(text_list)) 
+
 
 text_list = []
 for i in range(len(data)): # dataの行数分
